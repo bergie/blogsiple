@@ -12,7 +12,7 @@ server.configure ->
   server.use require('connect-conneg').acceptedTypes
 
   server.use '/', http.compiler
-    src: "#{__dirname}/../staticSrc"
+    src: "#{__dirname}/static"
     dest: "#{__dirname}/../static"
     enable: ['coffeescript', 'sass']
 
