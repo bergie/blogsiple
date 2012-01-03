@@ -1,0 +1,11 @@
+{
+  "name": "blogsiple",
+  "version": "0.0.1",
+  "dependencies": {
+    "express-resource": ">=0.2.4",
+    "jugglingdb": ">=0.0.7",
+    "sass": ">=0.5.0",
+    "jade": ">=0.20.0",
+    "connect-conneg": ">=0.1.1"
+  }
+}

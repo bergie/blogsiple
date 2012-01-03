@@ -1,0 +1,4 @@
+#!/usr/bin/env coffee
+app = require "#{__dirname}/../app"
+app.server.listen 8080, ->
+  console.log "Blogsiple listening in port 8080"

@@ -1,0 +1,26 @@
+!!! 5
+html
+  head
+    title !{title}
+    link(rel='stylesheet', href='http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/deps/midgard-theme/jquery.ui.all.css')
+    link(rel='stylesheet', href='/css/deps/midgard-toolbar/midgardbar.css')
+    script(src='/js/deps/jquery-1.6.4.min.js')
+    script(src='/js/deps/jquery-ui-1.8.16.custom.min.js')
+    script(src='/js/deps/underscore-min.js')
+    script(src='/js/deps/backbone-min.js')
+    script(src='/js/deps/vie-min.js')
+    script(src='/js/deps/modernizr.custom.80485.js')
+    script(src='/js/deps/hallo.js')
+    script(src='/js/deps/hallo/format.js')
+    script(src='/js/deps/jquery.Midgard.midgardCreate.js')
+    script(src='/js/deps/jquery.Midgard.midgardEditable.js')
+    script(src='/js/deps/jquery.Midgard.midgardStorage.js')
+    script(src='/js/deps/jquery.Midgard.midgardToolbar.js')
+    script(src='/js/editable.js')
+  body
+    div.container
+      div.content
+        div.page_header
+          h1(property='title') !{title}
+        !{body}
