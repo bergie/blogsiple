@@ -1,22 +1,22 @@
 http = require 'express'
 resource = require 'express-resource'
 
-exports.schema = schema = require './lib/schema'
+exports.schema = schema = require './schema'
 schema.schema.automigrate()
 
 exports.server = server = http.createServer()
 
-server.rdfmapper = require './lib/rdfmapper'
+server.rdfmapper = require './rdfmapper'
 
 server.configure ->
   server.use require('connect-conneg').acceptedTypes
 
   server.use '/', http.compiler
-    src: "#{__dirname}/staticSrc"
-    dest: "#{__dirname}/static"
+    src: "#{__dirname}/../staticSrc"
+    dest: "#{__dirname}/../static"
     enable: ['coffeescript', 'sass']
 
-  server.use '/', http.static "#{__dirname}/static"
+  server.use '/', http.static "#{__dirname}/../static"
 
   server.use http.bodyParser()
 
