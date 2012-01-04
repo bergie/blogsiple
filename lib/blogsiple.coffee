@@ -1,5 +1,6 @@
 http = require 'express'
 resource = require 'express-resource'
+resourcer = require './resource-juggling'
 
 exports.schema = schema = require './schema'
 schema.schema.automigrate()
@@ -7,6 +8,9 @@ schema.schema.automigrate()
 exports.server = server = http.createServer()
 
 server.rdfmapper = require './rdfmapper'
+
+browserid = require './authentication'
+authentication = browserid.setUp server, schema
 
 server.configure ->
   server.use require('connect-conneg').acceptedTypes
@@ -19,6 +23,13 @@ server.configure ->
   server.use '/', http.static "#{__dirname}/../static"
 
   server.use http.bodyParser()
+  server.use http.cookieParser()
+
+  server.use http.session
+    secret: 'I like to Create'
+
+  server.use authentication.initialize()
+  server.use authentication.session()
 
   server.use (req, res, next) ->
     return next() unless req.body
@@ -39,8 +50,17 @@ server.contentNegotiator = (req, res, next) ->
   next()
 
 registerBlog = (blog) ->
-  postResource = require './resource/post'
-  server.resource postResource.getResource blog, server
+  server.resource resourcer.getResource
+    schema: schema
+    name: 'Post'
+    urlName: 'post'
+    collection: blog.posts
+    toJSON: server.rdfmapper.toJSONLD
+
+server.resource 'users', resourcer.getResource
+  schema: schema
+  name: 'User'
+  urlName: 'user'
 
 schema.Blog.all (err, blogs) ->
   return registerBlog blogs[0] if blogs.length

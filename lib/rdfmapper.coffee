@@ -8,6 +8,12 @@ idToSubject = (id, request) ->
   "<#{request.url}>"
 
 exports.fromJSONLD = (data) ->
+  if data.length
+    newData = []
+    for item in data
+      newData.push exports.fromJSONLD item
+    return newData
+
   newData = {}
   for predicate, object of data
     cleaned = cleaner.exec predicate
@@ -18,6 +24,12 @@ exports.fromJSONLD = (data) ->
   newData
 
 exports.toJSONLD = (data, request) ->
+  if data.length
+    newData = []
+    for item in data
+      newData.push exports.toJSONLD item, request
+    return newData
+
   newData = {}
   for property, value of data
     continue if typeof value is 'function'
