@@ -52,6 +52,7 @@ exports.getResource = (options) ->
             blankItem = {}
             for property, defs of options.schema.schema.definitions[options.name].properties
               blankItem[property] = ''
+            items.push blankItem
 
           res.render "#{options.urlName}/index",
             locals:
