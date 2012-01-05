@@ -5,6 +5,7 @@ This example showcases the interplay between the [JugglingDB ORM](https://github
 
 ## Installation
 
+    $ git submodule init --update
     $ npm install
 
 ## Running

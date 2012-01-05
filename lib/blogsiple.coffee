@@ -22,6 +22,11 @@ server.configure ->
 
   server.use '/', http.static "#{__dirname}/../static"
 
+  # Static servers for create
+  server.use '/js/create/', http.static "#{__dirname}/../deps/create/src"
+  server.use '/js/create/deps/', http.static "#{__dirname}/../deps/create/deps"
+  server.use '/css/create/', http.static "#{__dirname}/../deps/create/themes"
+
   server.use http.bodyParser()
   server.use http.cookieParser()
 
