@@ -68,9 +68,9 @@ registerBlog = (blog) ->
   blog_resource.map 'get', 'workflow', (req, res) ->
     results = []    
     if req.post.published.toString() == 'true'
-      results.push {name: 'unpublish', label: 'Unpublish', action: {type: 'ajax', ajax: {type: 'PUT'}, url: "/#{req.post.id}/unpublish"}, type: 'button'}
+      results.push {name: 'unpublish', label: 'Unpublish', action: {type: 'http', http: {type: 'PUT'}, url: "/#{req.post.id}/unpublish"}, type: 'button'}
     else
-      results.push {name: 'publish', label: 'Publish', action: {type: 'ajax', ajax: {type: 'PUT'}, url: "/#{req.post.id}/publish"}, type: 'button'}    
+      results.push {name: 'publish', label: 'Publish', action: {type: 'http', http: {type: 'PUT'}, url: "/#{req.post.id}/publish"}, type: 'button'}    
     results.push {name: 'destroy', label: 'Destroy', action: {type: 'backbone_destroy'}, type: 'button'}
     
     res.json results
