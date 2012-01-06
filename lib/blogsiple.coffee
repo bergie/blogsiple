@@ -55,8 +55,8 @@ server.contentNegotiator = (req, res, next) ->
       return this.json req, res, next
   next()
 
-registerBlog = (blog) ->
-  server.resource resourcer.getResource
+registerBlog = (blog) ->  
+  blog_resource = server.resource resourcer.getResource
     schema: schema.schema
     model: schema.Post
     name: 'Post'
@@ -64,6 +64,18 @@ registerBlog = (blog) ->
     collection: blog.posts
     toJSON: server.rdfmapper.toJSONLD
     addPlaceholderForEmpty: true
+  
+  blog_resource.map 'get', 'workflow', (req, res) ->
+    results = [
+      {name: 'publish', label: 'Publish', action: {type: 'backbone_save', url: "/#{req.post.id}/publish"}, type: 'button'},
+      {name: 'force_destroy', label: 'Force Destroy', action: {type: 'backbone_destroy'}, type: 'button'}
+    ]
+    res.json results
+  
+  blog_resource.map 'put', 'publish', (req, res) ->
+    console.log 'PUBLISHED', req.post
+    req.post.updateAttributes req.body, (err, item) ->
+      res.send server.rdfmapper.toJSONLD req.post, req
 
 server.resource 'users', resourcer.getResource
   schema: schema.schema

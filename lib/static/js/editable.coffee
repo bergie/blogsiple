@@ -5,3 +5,6 @@ jQuery(document).ready ->
         return this.primaryCollection.url if this.primaryCollection
         return this.collection.url if this.collection
       this.getSubjectUri()
+    workflows:
+      url: (model) ->
+        return "#{model.getSubjectUri()}/workflow"
