@@ -66,15 +66,21 @@ registerBlog = (blog) ->
     addPlaceholderForEmpty: true
   
   blog_resource.map 'get', 'workflow', (req, res) ->
-    results = [
-      {name: 'publish', label: 'Publish', action: {type: 'backbone_save', url: "/#{req.post.id}/publish"}, type: 'button'},
-      {name: 'force_destroy', label: 'Delete', action: {type: 'backbone_destroy'}, type: 'button'}
-    ]
+    results = []    
+    if req.post.published.toString() == 'true'
+      results.push {name: 'unpublish', label: 'Unpublish', action: {type: 'http', http: {type: 'PUT'}, url: "/#{req.post.id}/unpublish"}, type: 'button'}
+    else
+      results.push {name: 'publish', label: 'Publish', action: {type: 'http', http: {type: 'PUT'}, url: "/#{req.post.id}/publish"}, type: 'button'}    
+    results.push {name: 'destroy', label: 'Delete', action: {type: 'backbone_destroy'}, type: 'button'}
+    
     res.json results
   
   blog_resource.map 'put', 'publish', (req, res) ->
-    console.log 'PUBLISHED', req.post
-    req.post.updateAttributes req.body, (err, item) ->
+    req.post.updateAttributes {published: true, published_at: (new Date())}, (err, item) ->
+      res.send server.rdfmapper.toJSONLD req.post, req
+      
+  blog_resource.map 'put', 'unpublish', (req, res) ->
+    req.post.updateAttributes {published: false, published_at: null}, (err, item) ->
       res.send server.rdfmapper.toJSONLD req.post, req
 
 server.resource 'users', resourcer.getResource
