@@ -1,6 +1,7 @@
 http = require 'express'
 resource = require 'express-resource'
 resourcer = require './resource-juggling'
+{Schema} = require 'jugglingdb'
 
 exports.schema = schema = require './schema'
 schema.schema.automigrate()
@@ -21,6 +22,11 @@ server.configure ->
     enable: ['coffeescript', 'sass']
 
   server.use '/', http.static "#{__dirname}/../static"
+
+  # Static servers for create
+  server.use '/js/create/', http.static "#{__dirname}/../deps/create/src"
+  server.use '/js/create/deps/', http.static "#{__dirname}/../deps/create/deps"
+  server.use '/css/create/', http.static "#{__dirname}/../deps/create/themes"
 
   server.use http.bodyParser()
   server.use http.cookieParser()
@@ -49,16 +55,17 @@ server.contentNegotiator = (req, res, next) ->
       return this.json req, res, next
   next()
 
-registerBlog = (blog) ->
+registerBlog = (blog) ->  
   blog_resource = server.resource resourcer.getResource
-    schema: schema
+    schema: schema.schema
+    model: schema.Post
     name: 'Post'
     urlName: 'post'
     collection: blog.posts
     toJSON: server.rdfmapper.toJSONLD
+    addPlaceholderForEmpty: true
   
   blog_resource.map 'get', 'workflow', (req, res) ->
-    console.log 'workflow',req.post
     results = [
       {name: 'publish', label: 'Publish', action: {type: 'backbone_save', url: "/#{req.post.id}/publish"}, type: 'button'},
       {name: 'force_destroy', label: 'Force Destroy', action: {type: 'backbone_destroy'}, type: 'button'}
@@ -71,7 +78,8 @@ registerBlog = (blog) ->
       res.send server.rdfmapper.toJSONLD req.post, req
 
 server.resource 'users', resourcer.getResource
-  schema: schema
+  schema: schema.schema
+  model: schema.User
   name: 'User'
   urlName: 'user'
 
