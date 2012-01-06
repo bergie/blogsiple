@@ -68,7 +68,7 @@ registerBlog = (blog) ->
   blog_resource.map 'get', 'workflow', (req, res) ->
     results = [
       {name: 'publish', label: 'Publish', action: {type: 'backbone_save', url: "/#{req.post.id}/publish"}, type: 'button'},
-      {name: 'force_destroy', label: 'Force Destroy', action: {type: 'backbone_destroy'}, type: 'button'}
+      {name: 'force_destroy', label: 'Delete', action: {type: 'backbone_destroy'}, type: 'button'}
     ]
     res.json results
   
