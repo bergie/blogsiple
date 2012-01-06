@@ -14,6 +14,8 @@ browserid = require './authentication'
 authentication = browserid.setUp server, schema
 
 server.configure ->
+  server.use http.logger()
+
   server.use require('connect-conneg').acceptedTypes
 
   server.use '/', http.compiler
