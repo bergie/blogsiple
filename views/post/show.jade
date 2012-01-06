@@ -1,3 +1,5 @@
-article(about=(item.id?'/'+item.id:''), typeof="post")
+- var subject = item.id
+- if (subject !== 'mgd:placeholder') { subject = '/' + subject; }
+article(about=subject, typeof="post")
   h1(property='title') !{item.title}
   div(property='content') !{item.content}

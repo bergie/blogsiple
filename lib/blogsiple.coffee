@@ -1,6 +1,7 @@
 http = require 'express'
 resource = require 'express-resource'
 resourcer = require './resource-juggling'
+{Schema} = require 'jugglingdb'
 
 exports.schema = schema = require './schema'
 schema.schema.automigrate()
@@ -56,14 +57,17 @@ server.contentNegotiator = (req, res, next) ->
 
 registerBlog = (blog) ->
   server.resource resourcer.getResource
-    schema: schema
+    schema: schema.schema
+    model: schema.Post
     name: 'Post'
     urlName: 'post'
     collection: blog.posts
     toJSON: server.rdfmapper.toJSONLD
+    addPlaceholderForEmpty: true
 
 server.resource 'users', resourcer.getResource
-  schema: schema
+  schema: schema.schema
+  model: schema.User
   name: 'User'
   urlName: 'user'
 
