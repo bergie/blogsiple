@@ -4,26 +4,31 @@ exports.schema = schema = new Schema 'redis', {}
 
 exports.Role = Role = schema.define 'Role',
   name:
-    type: Schema.String
+    type: String
     index: true
 
 exports.User = User = schema.define 'User',
   email:
-    type: Schema.String
+    type: String
     index: true
 
 exports.Blog = Blog = schema.define 'Blog',
   title:
-    type: Schema.string
+    type: String
     length: 255
 
 exports.Post = Post = schema.define 'Post',
   title:
-    type: Schema.String
+    type: String
     length: 255
     index: true
   content:
     type: Schema.Text
+  published:
+    type: Boolean
+    default: false
+  published_at:
+    type: Date
 
 User.hasMany Role,
   as: 'roles'
