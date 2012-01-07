@@ -8,3 +8,18 @@ jQuery(document).ready ->
     workflows:
       url: (model) ->
         return "#{model.getSubjectUri()}/workflow"
+    editorOptions:
+      default:
+        showAlways: true
+        plugins:
+          halloformat: {}
+          hallolists: {}
+          halloheadings: {}
+          halloimage:
+            uploadUrl: '/upload'
+            search: (query, limit, offset, success) ->
+              response =
+                offset: offset
+                total: limit + 1
+                assets: []
+              success response

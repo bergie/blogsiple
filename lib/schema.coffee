@@ -12,6 +12,22 @@ exports.User = User = schema.define 'User',
     type: String
     index: true
 
+exports.Tag = Tag = schema.define 'Tag',
+  url:
+    type: String
+    length: 255
+  label:
+    type: String
+    length: 255
+
+exports.Blob = Blob = schema.define 'Blob'
+  location:
+    type: String
+    length: 255
+  title:
+    type: String
+    length: 255
+
 exports.Blog = Blog = schema.define 'Blog',
   title:
     type: String
@@ -41,3 +57,11 @@ Blog.hasMany Post,
 Post.belongsTo Blog,
   as: 'blog'
   foreignKey: 'blog'
+
+Post.hasMany Tag,
+  as: 'tags'
+  foreignKey: 'post'
+
+Blob.hasMany Tag,
+  as: 'tags'
+  foreignKey: 'blob'

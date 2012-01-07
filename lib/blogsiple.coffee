@@ -2,6 +2,8 @@ http = require 'express'
 resource = require 'express-resource'
 resourcer = require './resource-juggling'
 {Schema} = require 'jugglingdb'
+fs = require 'fs'
+util = require 'util'
 
 exports.schema = schema = require './schema'
 schema.schema.automigrate()
@@ -12,6 +14,11 @@ server.rdfmapper = require './rdfmapper'
 
 browserid = require './authentication'
 authentication = browserid.setUp server, schema
+
+# Prepare directory for uploaded images
+fs.stat "#{__dirname}/../static/blobs", (err, stat) ->
+  return unless err
+  fs.mkdir "#{__dirname}/../static/blobs"
 
 server.configure ->
   server.use http.logger()
@@ -56,6 +63,20 @@ server.contentNegotiator = (req, res, next) ->
     if this.json and type is 'application/json'
       return this.json req, res, next
   next()
+
+server.post '/upload', (req, res, next) ->
+  for field, file of req.files
+    localName = "#{file.path.split('/').pop()}_#{file.name}"
+    localPath = "#{__dirname}/../static/blobs/#{localName}"
+    
+    input = fs.createReadStream file.path
+    output = fs.createWriteStream localPath
+    util.pump input, output, (err) ->
+      schema.Blob.create
+        location: localPath
+        title: file.filename
+      , (err, blog) ->
+        res.redirect "/blobs/#{localName}"
 
 registerBlog = (blog) ->  
   blog_resource = server.resource resourcer.getResource
