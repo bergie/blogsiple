@@ -9,7 +9,7 @@ exports.registerRoutes = (server, prefix, models, schema) ->
       model: models.Post
       name: 'Post'
       urlName: 'post'
-      collection: blog.posts
+      collection: -> blog.posts
       seek: (request, constraints, callback) ->
         constraints.blogId = blog.id
         models.Post.all
@@ -54,14 +54,14 @@ exports.registerRoutes = (server, prefix, models, schema) ->
         published: true
         published_at: (new Date())
       , (err, item) ->
-        res.send server.rdfmapper.toJSONLD req.post, req
+        res.send rdfmapper.toJSONLD req.post, req
       
     blog_resource.map 'put', 'unpublish', (req, res) ->
       req.post.updateAttributes
         published: false
         published_at: null
       , (err, item) ->
-        res.send server.rdfmapper.toJSONLD req.post, req
+        res.send rdfmapper.toJSONLD req.post, req
 
   models.Blog.all (err, blogs) ->
     return registerBlog blogs[0] if blogs.length

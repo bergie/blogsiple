@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "nodext": ">=0.0.2",
-    "nodext-create": ">=0.0.1",
+    "nodext-create": ">=0.0.2",
     "coffee-script": ">=1.2.0",
     "express": ">=2.5.4",
     "express-resource": ">=0.2.4",
