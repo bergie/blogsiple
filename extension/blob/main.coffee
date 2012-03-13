@@ -6,6 +6,7 @@ util = require 'util'
 class Blob extends nodext.Extension
   name: 'Blob'
   config: {}
+  models: {}
 
   configure: (server) ->
     # Prepare directory for uploaded images
@@ -15,8 +16,20 @@ class Blob extends nodext.Extension
 
     server.use "#{@config.urlPrefix}static/", express.static @config.blobDir
 
+  getModels: (schema, otherModels) ->
+    @models = {}
+    @models.Blob = schema.define 'Blob',
+      title:
+        type: String
+        length: 255
+      location:
+        type: String
+        length: 255
+    @models
+
   registerRoutes: (server) ->
     config = @config
+    models = @models
     server.post "#{config.urlPrefix}upload", (req, res, next) ->
       for field, file of req.files
         localName = "#{file.path.split('/').pop()}_#{file.name}"
@@ -25,7 +38,7 @@ class Blob extends nodext.Extension
         input = fs.createReadStream file.path
         output = fs.createWriteStream localPath
         util.pump input, output, (err) ->
-          schema.Blob.create
+          models.Blob.create
             location: localPath
             title: file.filename
           , (err, blog) ->

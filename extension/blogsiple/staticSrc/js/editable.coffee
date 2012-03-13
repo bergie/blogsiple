@@ -16,7 +16,7 @@ jQuery(document).ready ->
           hallolists: {}
           halloheadings: {}
           halloimage:
-            uploadUrl: '/upload'
+            uploadUrl: '/images/upload'
             search: (query, limit, offset, success) ->
               response =
                 offset: offset
