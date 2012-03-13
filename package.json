@@ -1,6 +1,13 @@
 {
   "name": "blogsiple",
+  "description":  "Simple CMS for NodeXT and Create",
+  "keywords":     ["cms"],
+  "author":       "Henri Bergius",
   "version": "0.0.1",
+  "licenses": [{
+    "type": "MIT",
+    "url": "https://github.com/bergie/blogsiple/raw/master/LICENSE"
+  }],
   "engine": {
     "node": ">=0.4"
   },
@@ -15,5 +22,9 @@
     "sass": ">=0.5.0",
     "jade": ">=0.20.0",
     "connect-conneg": ">=0.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bergie/blogsiple.git"
   }
 }
