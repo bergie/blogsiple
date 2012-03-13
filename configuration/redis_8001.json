@@ -1,0 +1,37 @@
+{
+  "server": {
+    "hostname": "127.0.0.1",
+    "port": 8001,
+    "view": {
+      "engine": "jade"
+    }
+  },
+  "database": {
+    "provider": "redis",
+    "configuration": {},
+    "logQueries": true
+  },
+  "extensions": {
+    "/blogsiple/": {
+      "name": "blogsiple",
+      "location": "./extension/blogsiple"
+    },
+    "/": {
+      "name": "blog",
+      "location": "./extension/blog",
+      "configuration": {}
+    },
+    "/images/": {
+      "name": "blob",
+      "location": "./extension/blob",
+      "configuration": {
+        "blobDir": "./blobs"
+      }
+    },
+    "/create/": {
+      "name": "create",
+      "location": "./node_modules/nodext-create",
+      "configuration": {}
+    }
+  }
+}

@@ -1,3 +1,2 @@
-node_modules
-static/js/*.js
-static/css/*.css
+node_modules/
+extension/blogsiple/static/

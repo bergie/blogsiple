@@ -1,16 +1,19 @@
-Simple blog system example
+Blogsiple - simple blog system example
 ==========================
 
-This example showcases the interplay between the [JugglingDB ORM](https://github.com/1602/jugglingdb), [express-resource REST serving](https://github.com/visionmedia/express-resource) and the [CreateJS content editing UI](http://createjs.org/). It also uses [connect-conneg](https://github.com/foxxtrot/connect-conneg) for content negotiation on formats to serve.
+Blogsiple is the official Node.js testbed for [Create](http://createjs.org/) CMS UI integration. It has been built using the [NodeXT](https://github.com/bergie/nodext) framework.
 
 ## Installation
 
-    $ git submodule update --init
     $ npm install
+
+You also need a JugglingDB database provider. By default we use Redis:
+
+    $ npm install redis
 
 ## Running
 
-    $ ./bin/blogsiple
+    $ ./node_modules/nodext/bin/nodext configuration/redis_8001.json
 
 ## TODO
 
