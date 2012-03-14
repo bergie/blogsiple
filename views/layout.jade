@@ -1,11 +1,12 @@
 !!! 5
-html
+html(lang='en')
   head
     title Blogsiple
     link(rel='stylesheet', href='/blogsiple/theme/Vader/jquery-ui-1.8.18.custom.css')
     link(rel='stylesheet', href='/create/css/midgard-theme/jquery.ui.all.css')
     link(rel='stylesheet', href='/create/css/midgard-toolbar/midgardbar.css')
     link(rel='stylesheet', href='/create/css/midgard-notifications/midgardnotif.css')
+    link(rel='stylesheet', href='/blogsiple/bootstrap/css/bootstrap.min.css')
     link(rel='stylesheet', href='/blogsiple/css/blogsiple.css')
     script(src='/create/deps/jquery-1.6.4.min.js')
     script(src='/create/deps/jquery-ui-1.8.16.custom.min.js')
@@ -18,7 +19,7 @@ html
     script(src='/blogsiple/js/editable.js')
   body
     div.container
-      div.content
-        div.page_header
+      div.row
+        header.span4
           h1(property='title') Blogsiple
         !{body}

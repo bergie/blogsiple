@@ -23,7 +23,7 @@ class BlogsipleExtension extends nodext.Extension
     server.use @config.urlPrefix, express.compiler
       src: "#{__dirname}/staticSrc"
       dest: "#{__dirname}/static"
-      enable: ['coffeescript', 'sass']
+      enable: ['coffeescript', 'less']
     server.use @config.urlPrefix, express.static "#{__dirname}/static"
 
 exports.extension = BlogsipleExtension
