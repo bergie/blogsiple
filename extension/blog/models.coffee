@@ -20,6 +20,17 @@ exports.getModels = (schema, otherModels) ->
       default: false
     published_at:
       type: Date
+    created_at:
+      type: Date
+
+  models.Post.beforeCreate = (next) ->
+    unless this.created_at
+      this.created_at = new Date
+    do next
+  models.Post.beforeUpdate = (next) ->
+    unless this.created_at
+      this.created_at = new Date
+    do next
 
   models.Blog.hasMany models.Post,
     as: 'posts'

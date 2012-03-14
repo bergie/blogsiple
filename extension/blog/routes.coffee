@@ -14,6 +14,7 @@ exports.registerRoutes = (server, prefix, models, schema) ->
         constraints.blogId = blog.id
         models.Post.all
           where: constraints
+          order: 'created_at ASC'
         , callback
       toJSON: rdfmapper.toJSONLD
       addPlaceholderForEmpty: true

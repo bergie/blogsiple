@@ -1,5 +1,6 @@
 - var subject = item.id
 - if (subject !== 'mgd:placeholder') { subject = '/' + subject; }
-article(about=subject, typeof="post")
+article(about=subject, typeof="post", class="span8")
   h1(property='title') !{item.title}
+  div(property='created_at') !{item.created_at}
   div(property='content') !{item.content}
