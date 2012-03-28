@@ -20,8 +20,8 @@ exports.registerRoutes = (server, prefix, models, schema) ->
       addPlaceholderForEmpty: true
   
     blog_resource.map 'get', 'workflow', (req, res) ->
-      results = []    
-      if req.post.published
+      results = []
+      if req.post.published is 'true'
         results.push
           name: 'unpublish'
           label: 'Unpublish'
