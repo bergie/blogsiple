@@ -1,5 +1,6 @@
 nodext = require 'nodext'
 {rdfmapper} = require 'nodext-create'
+http = require 'express'
 
 class Blog extends nodext.Extension
   name: 'Blog'
@@ -8,6 +9,8 @@ class Blog extends nodext.Extension
   configure: (server) ->
     # We need content negotiation
     server.use require('connect-conneg').acceptedTypes
+
+    server.use http.bodyParser()
 
     # Convert received JSON-LD packets to JSON compatible
     # with our models

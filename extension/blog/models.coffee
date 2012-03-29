@@ -7,8 +7,15 @@ exports.getModels = (schema, otherModels) ->
     title:
       type: String
       length: 255
+    description:
+      type: String
+      length: 255
 
   models.Post = schema.define 'Post',
+    uuid:
+      type: String
+      length: 255
+      index: true
     title:
       type: String
       length: 255
@@ -22,15 +29,6 @@ exports.getModels = (schema, otherModels) ->
       type: Date
     created_at:
       type: Date
-
-  models.Post.beforeCreate = (next) ->
-    unless this.created_at
-      this.created_at = new Date
-    do next
-  models.Post.beforeUpdate = (next) ->
-    unless this.created_at
-      this.created_at = new Date
-    do next
 
   models.Blog.hasMany models.Post,
     as: 'posts'

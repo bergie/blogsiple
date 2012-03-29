@@ -1,0 +1,74 @@
+#!/usr/bin/env coffee
+feedUrl = process.argv[3]
+
+request = require 'request'
+xml2js = require 'xml2js'
+nodext = require 'nodext'
+parser = new xml2js.Parser
+
+config = nodext.getConfig()
+schema = nodext.getSchema config
+models = nodext.getModels schema, config
+
+uuidRegex = ///
+  http://(.*)/midcom-permalink-(.*)
+///
+
+itemToPost = (item) ->
+  post =
+    uuid: uuidRegex.exec(item.guid)[2] 
+    title: item.title
+    content: item.description
+    created_at: new Date item.pubDate
+    published: true
+    published_at: new Date item.pubDate
+
+createPost = (item, blog, cb) ->
+  postAttributes = itemToPost item
+  postAttributes.blogId = blog.id
+  models.Post.create postAttributes, cb
+
+updatePost = (item, post, cb) ->
+  post.updateAttributes itemToPost(item), cb
+
+importItem = (item, blog) ->
+  uuid = uuidRegex.exec(item.guid)[2]
+
+  cb = (err, post) ->
+    return console.log "Error storing post #{item.title}", err if err
+    return console.log "Post #{item.title} updated" unless post
+    console.log "Post #{item.title} stored as #{post.id}"
+
+  models.Post.all
+    where:
+      uuid: uuid
+      blogId: blog.id
+  , (err, posts) ->
+    return updatePost item, posts[0], cb if posts.length
+    createPost item, blog, cb
+
+updateBlog = (channel, blog) ->
+  blog.updateAttributes channel, (err) ->
+    return console.log "Failed to update blog #{blog.title}", err if err
+    console.log "#{blog.title} updated from channel information"
+
+importFeed = (url, blog) ->
+  request feedUrl, (err, res, body) ->
+    return console.log err if err
+
+    parser.parseString body, (err, feed) ->
+      return console.log err if err
+
+      updateBlog
+        title: feed.channel.title
+        description: feed.channel.description
+      , blog
+
+      importItem item, blog for item in feed.channel.item
+
+models.Blog.all (err, blogs) ->
+  return importFeed feedUrl, blogs[0] if blogs.length
+  models.Blog.create
+    title: 'Blogsiple'
+  , (err, blog) ->
+    importFeed feedUrl, blog
