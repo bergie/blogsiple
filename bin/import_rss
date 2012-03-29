@@ -10,13 +10,9 @@ config = nodext.getConfig()
 schema = nodext.getSchema config
 models = nodext.getModels schema, config
 
-uuidRegex = ///
-  http://(.*)/midcom-permalink-(.*)
-///
-
 itemToPost = (item) ->
   post =
-    uuid: uuidRegex.exec(item.guid)[2] 
+    uuid: item.guid
     title: item.title
     content: item.description
     created_at: new Date item.pubDate
@@ -32,7 +28,7 @@ updatePost = (item, post, cb) ->
   post.updateAttributes itemToPost(item), cb
 
 importItem = (item, blog) ->
-  uuid = uuidRegex.exec(item.guid)[2]
+  uuid = item.guid
 
   cb = (err, post) ->
     return console.log "Error storing post #{item.title}", err if err
