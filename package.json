@@ -12,7 +12,7 @@
     "node": ">=0.4"
   },
   "dependencies": {
-    "nodext": ">=0.0.6",
+    "nodext": ">=0.0.7",
     "nodext-create": ">=0.0.5",
     "coffee-script": ">=1.2.0",
     "express": ">=2.5.4",
