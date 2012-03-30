@@ -9,7 +9,7 @@
   "database": {
     "provider": "redis",
     "configuration": {},
-    "logQueries": true
+    "logQueries": false
   },
   "extensions": {
     "/blogsiple/": {
