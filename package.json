@@ -12,18 +12,19 @@
     "node": ">=0.4"
   },
   "dependencies": {
-    "nodext": ">=0.0.7",
-    "nodext-create": ">=0.0.5",
-    "coffee-script": ">=1.2.0",
     "express": ">=2.5.4",
     "express-resource": ">=0.2.4",
     "resource-juggling": ">=0.0.1",
+    "nodext": ">=0.0.7",
+    "nodext-create": ">=0.0.5",
+    "coffee-script": ">=1.2.0",
     "jugglingdb": ">=0.0.7",
     "less": ">=1.3.0",
     "jade": ">=0.20.0",
     "connect-conneg": ">=0.1.1",
     "request": "2.9.x",
-    "xml2js": "0.1.x"
+    "xml2js": "0.1.x",
+    "redis": ">=0.7.1"
   },
   "repository": {
     "type": "git",
