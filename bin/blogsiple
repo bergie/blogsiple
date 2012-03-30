@@ -1,0 +1,6 @@
+#!/usr/bin/env coffee
+nodext = require 'nodext'
+cfg = nodext.getConfig()
+app = nodext.server.createApplication cfg
+app.listen cfg.server.port, ->
+  console.log "Blogsiple listening in #{cfg.server.hostname} port #{cfg.server.port}"
