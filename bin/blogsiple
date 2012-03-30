@@ -1,6 +1,11 @@
 #!/usr/bin/env coffee
 nodext = require 'nodext'
-cfg = nodext.getConfig()
+path = require 'path'
+if process.argv.length < 3
+  cfg = nodext.getConfig path.resolve "#{__dirname}/../configuration/redis_8001.json"
+else
+  cfg = nodext.getConfig()
+
 app = nodext.server.createApplication cfg
 app.listen cfg.server.port, ->
   console.log "Blogsiple listening in #{cfg.server.hostname} port #{cfg.server.port}"

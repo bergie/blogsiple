@@ -22,9 +22,9 @@ You also need a JugglingDB database provider. By default we use Redis, which is 
 
 ## Running
 
-With globally-installed Blogsiple:
+With globally-installed Blogsiple with a default configuration:
 
-    $ blogsiple /usr/local/lib/node_modules/blogsiple/configuration/redis_8001.json
+    $ blogsiple
 
 With locally-installed Blogsiple:
 
