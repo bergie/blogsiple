@@ -1,6 +1,9 @@
 - var subject = item.id
 - if (subject !== 'mgd:placeholder') { subject = '/' + subject; }
 article(about=subject, typeof="post", class="span8")
-  h1(property='title') !{item.title}
-  div(property='created_at') !{item.created_at}
+  div.page-header
+    h1
+      a(href=subject)
+        span(property='title') !{item.title}
+      small(property='created_at') &nbsp;!{item.created_at}
   div(property='content') !{item.content}
