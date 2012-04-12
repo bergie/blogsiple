@@ -60,7 +60,7 @@ importFeed = (url, blog) ->
         description: feed.channel.description
       , blog
 
-      importItem item, blog for item in feed.channel.item
+      importItem item, blog for item in feed.channel.item.reverse()
 
 models.Blog.all (err, blogs) ->
   return importFeed feedUrl, blogs[0] if blogs.length
