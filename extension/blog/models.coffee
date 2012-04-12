@@ -38,4 +38,9 @@ exports.getModels = (schema, otherModels) ->
     as: 'blog'
     foreignKey: 'blogId'
 
+  models.Post.afterCreate = (next) ->
+    unless @created_at
+      @updateAttribute 'created_at', new Date, ->
+    do next
+
   models
