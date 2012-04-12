@@ -25,7 +25,8 @@
     "connect-conneg": ">=0.1.1",
     "request": "2.9.x",
     "xml2js": "0.1.x",
-    "redis": ">=0.7.1"
+    "redis": ">=0.7.1",
+    "pg": "0.6.x"
   },
   "repository": {
     "type": "git",
