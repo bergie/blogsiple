@@ -38,6 +38,32 @@ You can populate the Blogsiple database with blog posts from any RSS feed. Do th
 
     $ ./bin/blogsiple_import_rss configuration/redis_8001.json http://bergie.iki.fi/blog/rss.xml
 
+## Deploying on Heroku
+
+You'll need a working Heroku account and the [Heroku toolbelt](https://toolbelt.heroku.com/) installed, and a local Git checkout of Blogsiple.
+
+Create an app:
+
+    $ heroku apps:create -s cedar my-blog-name
+
+Add the Postgres database (the free option in this example):
+
+    $ heroku addons:add shared-database
+
+Deploy on Heroku:
+
+    $ git push heroku master
+
+Create the database tables:
+
+    $ heroku run ./node_modules/nodext/bin/nodext_storage_create configuration/heroku.json
+
+Import existing blog entries (optional), replacing the URL below with your own feed:
+
+    $ heroku run ./bin/blogsiple_import_rss configuration/heroku.json http://bergie.iki.fi/blog/rss.xml
+
+Go to your app at <http://my-blog-name.herokuapp.com>
+
 ## TODO
 
 * Authentication with [PassportJS](http://passportjs.org/)
