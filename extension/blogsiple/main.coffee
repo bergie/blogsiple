@@ -9,7 +9,7 @@ class BlogsipleExtension extends nodext.Extension
   makeDir: (dir, cb) ->
     fs.stat dir, (err, stat) =>
       return cb() unless err
-      fs.mkdir dir, 0777, cb
+      fs.mkdir dir, 0o0777, cb
 
   makeDirs: ->
     @makeDir "#{__dirname}/static", =>
