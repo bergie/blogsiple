@@ -8,8 +8,9 @@
     "type": "MIT",
     "url": "https://github.com/bergie/blogsiple/raw/master/LICENSE"
   }],
-  "engine": {
-    "node": ">=0.4"
+  "engines": {
+    "node": "0.6.x",
+    "npm": "1.1.x"
   },
   "dependencies": {
     "express": ">=2.5.4",
