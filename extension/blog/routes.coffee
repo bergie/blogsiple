@@ -10,12 +10,6 @@ exports.registerRoutes = (server, prefix, models, schema) ->
       name: 'Post'
       urlName: 'post'
       collection: -> blog.posts
-      seek: (request, constraints, callback) ->
-        constraints.blogId = blog.id
-        models.Post.all
-          where: constraints
-          order: 'id DESC'
-        , callback
       toJSON: rdfmapper.toJSONLD
       addPlaceholderForEmpty: true
   
