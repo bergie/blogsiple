@@ -33,7 +33,7 @@
     "mocha": "1.0.x"
   },
   "scripts": {
-    "test": "mocha -R spec --compilers coffee:coffee-script extension/*/test/*"
+    "test": "./node_modules/mocha/bin/mocha -R spec --compilers coffee:coffee-script extension/*/test/*"
   },
   "repository": {
     "type": "git",
