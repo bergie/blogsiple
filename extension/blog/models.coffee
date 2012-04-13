@@ -11,6 +11,8 @@ exports.getModels = (schema, otherModels) ->
       type: String
       length: 255
 
+  models.Blog.validatesUniquenessOf 'title'
+
   models.Post = schema.define 'Post',
     uuid:
       type: String

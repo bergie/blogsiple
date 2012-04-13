@@ -28,6 +28,13 @@
     "redis": ">=0.7.1",
     "pg": "0.6.x"
   },
+  "devDependencies": {
+    "chai": "0.5.x",
+    "mocha": "1.0.x"
+  },
+  "scripts": {
+    "test": "mocha -R spec --compilers coffee:coffee-script extension/*/test/*"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/bergie/blogsiple.git"
