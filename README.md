@@ -62,7 +62,7 @@ Import existing blog entries (optional), replacing the URL below with your own f
 
     $ heroku run ./bin/blogsiple_import_rss configuration/heroku.json http://bergie.iki.fi/blog/rss.xml
 
-Go to your app at <http://my-blog-name.herokuapp.com>
+Go to your app at <http://my-blog-name.herokuapp.com> (see for example <http://blogsiple.herokuapp.com>)
 
 ## TODO
 
