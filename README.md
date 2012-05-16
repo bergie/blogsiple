@@ -56,7 +56,7 @@ Deploy on Heroku:
 
 Create the database tables:
 
-    $ heroku run ./node_modules/nodext/bin/nodext_storage_create configuration/heroku.json
+    $ heroku run ./node_modules/.bin/nodext_storage_create configuration/heroku.json
 
 Import existing blog entries (optional), replacing the URL below with your own feed:
 

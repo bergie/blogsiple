@@ -1,1 +1,1 @@
-web: ./node_modules/nodext/bin/nodext configuration/heroku.json
+web: ./node_modules/.bin/nodext configuration/heroku.json
