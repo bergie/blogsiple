@@ -13,7 +13,7 @@
     "npm": "1.1.x"
   },
   "dependencies": {
-    "express": ">=2.5.4",
+    "express": "2.5.x",
     "express-resource": ">=0.2.4",
     "resource-juggling": ">=0.0.1",
     "nodext": "0.1.x",
