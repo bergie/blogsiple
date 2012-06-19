@@ -3,6 +3,7 @@ jQuery(document).ready ->
   v.use new v.StanbolService
     proxyDisabled: true
     url : 'http://dev.iks-project.eu:8081'
+  v.use new v.RdfaService
 
   jQuery('body').midgardCreate
     vie: v
