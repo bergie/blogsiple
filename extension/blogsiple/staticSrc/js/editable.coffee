@@ -26,11 +26,6 @@ jQuery(document).ready ->
           halloblock: {}
           halloimage:
             uploadUrl: '/images/upload'
-            search: (query, limit, offset, success) ->
-              response =
-                offset: offset
-                total: limit + 1
-                assets: []
-              success response
+            searchUrl: '/images/search'
           halloannotate:
             vie: v

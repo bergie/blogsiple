@@ -30,6 +30,31 @@ class Blob extends nodext.Extension
   registerRoutes: (server) ->
     config = @config
     models = @models
+
+    server.get "#{config.urlPrefix}search", (req, res, next) ->
+      return res.send 404 unless req.query.q
+
+      search = new RegExp req.query.q, 'i'
+
+      offset = parseInt req.query.offset ? 0
+      limit = parseInt req.query.limit ? 10
+
+      models.Blob.all {}, (err, blobs) ->
+        matched = []
+        for blob in blobs
+          continue if blob.title.search(search) is -1
+
+          localName = blob.location.split('/').pop()
+          matched.push
+            label: blob.title
+            url: "#{config.urlPrefix}static/#{localName}"
+
+        res.send
+          assets: matched.slice offset, offset + limit
+          offset: offset
+          limit: limit
+          total: matched.length
+
     server.post "#{config.urlPrefix}upload", (req, res, next) ->
       for field, file of req.files
         localName = "#{file.path.split('/').pop()}_#{file.name}"
@@ -41,7 +66,7 @@ class Blob extends nodext.Extension
           models.Blob.create
             location: localPath
             title: file.filename
-          , (err, blog) ->
+          , (err, blob) ->
             res.redirect "#{config.urlPrefix}static/#{localName}"
 
 exports.extension = Blob
