@@ -9,8 +9,8 @@
     "url": "https://github.com/bergie/blogsiple/raw/master/LICENSE"
   }],
   "engines": {
-    "node": "0.6.x",
-    "npm": "1.1.x"
+    "node": ">=0.6.0",
+    "npm": ">=1.1.0"
   },
   "dependencies": {
     "express": "2.5.x",
