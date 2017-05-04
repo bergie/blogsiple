@@ -13,24 +13,24 @@
     "npm": ">=1.1.0"
   },
   "dependencies": {
-    "express": "2.5.x",
+    "express": "~4.15.2",
     "express-resource": ">=0.2.4",
     "resource-juggling": ">=0.0.1",
-    "nodext": "0.1.x",
+    "nodext": "~0.2.0",
     "nodext-create": ">=0.0.5",
     "coffee-script": ">=1.2.0",
-    "jugglingdb": "0.1.x",
+    "jugglingdb": "~1.0.2",
     "less": ">=1.3.0",
     "jade": ">=0.20.0",
     "connect-conneg": ">=0.1.1",
-    "request": "2.9.x",
-    "xml2js": "0.1.x",
+    "request": "~2.81.0",
+    "xml2js": "~0.4.17",
     "redis": ">=0.7.1",
-    "pg": "0.6.x"
+    "pg": "~6.1.5"
   },
   "devDependencies": {
-    "chai": "0.5.x",
-    "mocha": "1.0.x"
+    "chai": "~3.5.0",
+    "mocha": "~3.3.0"
   },
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha -R spec --compilers coffee:coffee-script extension/*/test/*"
