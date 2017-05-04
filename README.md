@@ -1,6 +1,8 @@
 Blogsiple - simple blog system example
 ==========================
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/bergie/blogsiple.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://secure.travis-ci.org/bergie/blogsiple.png?branch=master)](http://travis-ci.org/bergie/blogsiple)
 
 Blogsiple is the official Node.js testbed for [Create](http://createjs.org/) CMS UI integration. It has been built using the [NodeXT](https://github.com/bergie/nodext) framework.
